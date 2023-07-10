@@ -35,7 +35,7 @@ std::string& User::getPass()
 }
 void User::writeUser()
 {
-	std::fstream file(" user.txt", std::ios::out);
+	std::fstream file("user.txt", std::ios::out);
 	file << "_name:" << name_<<"\n";
 	file << "_login:" << login_<<"\n";
 	file << "_pass:" << password_<<"\n";
@@ -43,7 +43,7 @@ void User::writeUser()
 }
 void User::readUser()
 {
-	std::fstream file(" user.txt", std::ios::in);
+	std::fstream file("user.txt", std::ios::in);
 	
 	/*auto permission = std::filesystem::perm::group_all |
 		std::filesystem::perm::other_all;
@@ -75,4 +75,3 @@ void User::readUser()
 	}
 	file.close();
 }
-

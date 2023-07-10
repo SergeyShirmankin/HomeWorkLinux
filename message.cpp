@@ -1,5 +1,6 @@
 #include "Message.h"
 #include <fstream>
+#include <filesystem>
 Message::Message()
 {
 	readMessage();
@@ -46,10 +47,10 @@ void Message::readMessage()
 {
 	std::fstream file("message.txt", std::ios::in);
 
-	/*auto permission = std::filesystem::perm::group_all |
-		std::filesystem::perm::other_all;
-	std::filesystem::permission(" user.txt", permission,
-		std::filesystem::perm_options::remove);*/
+	auto permission = std::filesystem::perms::group_all |
+		std::filesystem::perms::others_all;
+	std::filesystem::permissions("message.txt", permission,
+		std::filesystem::perm_options::remove);
 
 	const std::string delimetr = ":";
 	if (file.is_open())
