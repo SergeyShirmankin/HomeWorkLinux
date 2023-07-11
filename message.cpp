@@ -1,6 +1,7 @@
 #include "Message.h"
 #include <fstream>
 #include <filesystem>
+const std::string fileNameM = "message.txt";
 Message::Message()
 {
 	readMessage();
@@ -36,8 +37,9 @@ std::string& Message::getResiver()
 
 void Message::writeMessage()
 	{
-	    std::fstream file("message.txt", std::ios::out);
-		file << "_text:" << text_ << "\n";
+	    //std::fstream file("message.txt", std::ios::out);
+		std::fstream file(fileNameM, std::ios::out);
+        file << "_text:" << text_ << "\n";
 		file << "_sender:" << sender_ << "\n";
 		file << "_receiver:" << resiver_ << "\n";
 		file.close();
@@ -45,11 +47,13 @@ void Message::writeMessage()
 
 void Message::readMessage()
 {
-	std::fstream file("message.txt", std::ios::in);
+	//std::fstream file("message.txt", std::ios::in);
+    std::fstream file(fileNameM, std::ios::in);
 
 	auto permission = std::filesystem::perms::group_all |
 		std::filesystem::perms::others_all;
-	std::filesystem::permissions("message.txt", permission,
+	//std::filesystem::permissions("message.txt", permission,
+        std::filesystem::permissions(fileNameM, permission,
 		std::filesystem::perm_options::remove);
 
 	const std::string delimetr = ":";
