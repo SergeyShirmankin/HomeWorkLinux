@@ -1,6 +1,7 @@
 #include "User.h"
 #include <fstream>
 #include <filesystem>
+const std::string fileName = "user.txt";
 User::User()
 {
 	readUser();
@@ -35,7 +36,9 @@ std::string& User::getPass()
 }
 void User::writeUser()
 {
-	std::fstream file("user.txt", std::ios::out);
+	//std::fstream file("user.txt", std::ios::out);
+	std::fstream file(fileName, std::ios::out);
+    
 	file << "_name:" << name_<<"\n";
 	file << "_login:" << login_<<"\n";
 	file << "_pass:" << password_<<"\n";
@@ -43,13 +46,14 @@ void User::writeUser()
 }
 void User::readUser()
 {
-	std::fstream file("user.txt", std::ios::in);
-	
+	//std::fstream file("user.txt", std::ios::in);
+	std::fstream file(fileName, std::ios::in);
+
 	auto permission = std::filesystem::perms::group_all |
          std::filesystem::perms::others_all;
-     std::filesystem::permissions("user.txt", permission,
-         std::filesystem::perm_options::remove);
-     
+     //std::filesystem::permissions("user.txt", permission,
+     std::filesystem::permissions(fileName, permission, 
+     std::filesystem::perm_options::remove); 
     const std::string delimetr = ":";
 	if (file.is_open())
 	{
